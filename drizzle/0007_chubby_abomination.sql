@@ -1,0 +1,1 @@
+ALTER TABLE "products" ADD COLUMN "is_offer" boolean DEFAULT false;
