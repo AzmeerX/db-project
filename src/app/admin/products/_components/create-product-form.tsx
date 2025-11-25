@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { productSchema } from '@/lib/validators/productSchema';
@@ -16,24 +16,41 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
+import { Product } from '@/types';
 
 export type FormValues = z.input<typeof productSchema>;
 
 const CreateProductForm = ({
     onSubmit,
     disabled,
+    defaultValues,
+    isEdit = false,
 }: {
     onSubmit: (formValus: FormValues) => void;
     disabled: boolean;
+    defaultValues?: Product | null;
+    isEdit?: boolean;
 }) => {
     const form = useForm<z.infer<typeof productSchema>>({
         resolver: zodResolver(productSchema),
         defaultValues: {
-            name: '',
-            description: '',
-            price: 0,
+            name: defaultValues?.name || '',
+            description: defaultValues?.description || '',
+            price: defaultValues?.price || 0,
+            isOffer: defaultValues?.isOffer || false,
         },
     });
+
+    useEffect(() => {
+        if (defaultValues) {
+            form.reset({
+                name: defaultValues.name,
+                description: defaultValues.description,
+                price: defaultValues.price,
+                isOffer: defaultValues.isOffer,
+            });
+        }
+    }, [defaultValues, form]);
 
     const fileRef = form.register('image');
 
@@ -129,7 +146,7 @@ const CreateProductForm = ({
                 />
 
                 <Button className="w-full" disabled={disabled}>
-                    {disabled ? <Loader2 className="size-4 animate-spin" /> : 'Create'}
+                    {disabled ? <Loader2 className="size-4 animate-spin" /> : isEdit ? 'Update' : 'Create'}
                 </Button>
             </form>
         </Form>

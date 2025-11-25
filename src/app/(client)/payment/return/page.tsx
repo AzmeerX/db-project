@@ -9,20 +9,23 @@ export default function ReturnPage() {
     return (
         <>
             <Header />
-            <section className="custom-height relative bg-[#f5f5f5]">
-                <div className="z-50 mx-auto flex h-full max-w-6xl items-center justify-center gap-x-10 px-5 py-14 md:py-20">
-                    <Card className="flex flex-col items-center justify-center gap-y-3 rounded border-none p-5 shadow-xl md:w-2/5">
-                        <CircleX className="size-40 text-white" fill="#de4a4a" />
-                        <h3 className="text-4xl font-bold">Payment Failed!</h3>
-                        <span className="text-center">
-                            Your payment could not be processed at this time. Please try again after
-                            sometime
+            <section className="custom-height relative bg-neutral-50">
+                <div className="z-50 mx-auto flex h-full max-w-6xl items-center justify-center px-5 py-20">
+                    <div className="flex flex-col items-center justify-center gap-6 border border-neutral-200 bg-white p-12 md:w-2/5 md:p-16">
+                        <div className="border border-neutral-900 p-6">
+                            <CircleX className="h-16 w-16 text-neutral-900" />
+                        </div>
+                        <h3 className="text-3xl font-light tracking-wider text-neutral-900">PAYMENT DECLINED</h3>
+                        <span className="text-center text-neutral-600 font-light leading-relaxed">
+                            Your payment could not be processed at this time. Please try again.
                         </span>
-                        <span>Have a great day!</span>
-                        <Link href="/">
-                            <Button className="mt-5">Go back</Button>
+                        <span className="text-sm text-neutral-500 font-light tracking-wide">Contact support if the issue persists.</span>
+                        <Link href="/" className="w-full mt-4">
+                            <Button className="w-full bg-neutral-900 hover:bg-neutral-800 text-white rounded-none h-11 font-light tracking-wider">
+                                RETURN HOME
+                            </Button>
                         </Link>
-                    </Card>
+                    </div>
                 </div>
             </section>
         </>

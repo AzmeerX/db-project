@@ -11,8 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Star, Trophy, Users, Heart, CheckCircle } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
+import { Star, Award, ArrowRight, ShoppingBag } from 'lucide-react';
 
 const BestSellingPage = () => {
     const { data: products, isLoading } = useQuery({
@@ -23,89 +22,74 @@ const BestSellingPage = () => {
     return (
         <>
             <Header />
-            <main className="min-h-screen bg-gray-50">
-                {/* Section 1: Hero */}
-                <section className="relative h-[40vh] w-full overflow-hidden bg-brown-900 text-white">
-                    <div className="absolute inset-0 bg-[url('/assets/hero-pattern.png')] opacity-10"></div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-brown-900 to-transparent"></div>
-                    <div className="container relative mx-auto flex h-full flex-col justify-center px-5">
-                        <div className="flex items-center gap-2 text-yellow-400">
-                            <Trophy className="h-6 w-6" />
-                            <span className="font-bold uppercase tracking-widest">Customer Favorites</span>
-                        </div>
-                        <h1 className="mt-4 text-5xl font-bold md:text-7xl">Best Selling</h1>
-                        <p className="mt-4 max-w-xl text-lg text-brown-100">
-                            Discover the chocolates that everyone is talking about. Our most popular, 
-                            highest-rated treats selected just for you.
-                        </p>
-                    </div>
-                </section>
-
-                {/* Section 2: Stats */}
-                <section className="bg-white py-10 shadow-sm">
-                    <div className="container mx-auto grid grid-cols-2 gap-8 px-5 md:grid-cols-4">
-                        {[
-                            { icon: Users, label: 'Happy Customers', value: '10k+' },
-                            { icon: Star, label: '5-Star Reviews', value: '5000+' },
-                            { icon: Heart, label: 'Repeat Buyers', value: '95%' },
-                            { icon: CheckCircle, label: 'Quality Assured', value: '100%' },
-                        ].map((stat, i) => (
-                            <div key={i} className="flex flex-col items-center justify-center text-center">
-                                <stat.icon className="mb-2 h-8 w-8 text-brown-500" />
-                                <span className="text-3xl font-bold text-brown-900">{stat.value}</span>
-                                <span className="text-sm text-gray-500">{stat.label}</span>
+            <main className="min-h-screen bg-white">
+                {/* Hero Section */}
+                <section className="bg-neutral-50 py-16 md:py-24">
+                    <div className="container mx-auto px-4 md:px-6 lg:px-8">
+                        <div className="text-center space-y-6 max-w-3xl mx-auto">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-900 text-white text-xs tracking-wider rounded-full">
+                                <Award className="h-3 w-3" />
+                                BEST SELLERS
                             </div>
-                        ))}
+                            <h1 className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-neutral-900">
+                                Customer Favorites
+                            </h1>
+                            <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed">
+                                Discover our most loved chocolates, carefully selected based on customer reviews and popularity.
+                            </p>
+                        </div>
                     </div>
                 </section>
 
-                {/* Section 3: Product Grid */}
-                <section className="container mx-auto px-5 py-20">
-                    <div className="mb-12 text-center">
-                        <h2 className="text-3xl font-bold text-brown-900 md:text-4xl">Top Rated Collections</h2>
-                        <Separator className="mx-auto mt-4 h-1 w-20 bg-brown-500" />
-                    </div>
-
-                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {/* Products Section */}
+                <section className="container mx-auto px-4 md:px-6 lg:px-8 py-16 md:py-24">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
                         {isLoading ? (
-                            Array.from({ length: 4 }).map((_, i) => (
-                                <div key={i} className="flex flex-col gap-4">
-                                    <Skeleton className="aspect-square w-full rounded-xl bg-gray-200" />
-                                    <Skeleton className="h-6 w-3/4 bg-gray-200" />
-                                    <Skeleton className="h-4 w-1/2 bg-gray-200" />
+                            Array.from({ length: 8 }).map((_, i) => (
+                                <div key={i} className="space-y-4">
+                                    <Skeleton className="aspect-[3/4] w-full bg-neutral-200" />
+                                    <Skeleton className="h-4 w-3/4 bg-neutral-200" />
+                                    <Skeleton className="h-4 w-1/4 bg-neutral-200" />
+                                    <Skeleton className="h-10 w-full bg-neutral-200" />
                                 </div>
                             ))
                         ) : products && products.length > 0 ? (
-                            products.map((product: Product & { totalSold: number }) => (
-                                <div
-                                    key={product.id}
-                                    className="group relative flex flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:-translate-y-1 hover:shadow-xl"
-                                >
-                                    <div className="absolute left-3 top-3 z-10 rounded-full bg-yellow-400 px-3 py-1 text-xs font-bold text-brown-900 shadow-sm">
-                                        #{products.indexOf(product) + 1} Best Seller
-                                    </div>
-                                    <div className="relative aspect-square overflow-hidden bg-gray-100">
-                                        <Image
-                                            src={`/assets/${product.image}`}
-                                            alt={product.name}
-                                            fill
-                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                        />
-                                    </div>
-                                    <div className="flex flex-1 flex-col p-5">
-                                        <div className="mb-2 flex items-center gap-1 text-yellow-400">
-                                            {[...Array(5)].map((_, i) => (
-                                                <Star key={i} className="h-4 w-4 fill-current" />
-                                            ))}
-                                            <span className="ml-1 text-xs text-gray-400">({product.totalSold * 12} reviews)</span>
-                                        </div>
-                                        <h3 className="text-lg font-bold text-brown-900">{product.name}</h3>
-                                        <p className="mt-1 line-clamp-2 text-sm text-gray-500">{product.description}</p>
-                                        <div className="mt-4 flex items-center justify-between">
-                                            <span className="text-xl font-bold text-brown-900">${product.price}</span>
-                                            <Link href={`/product/${product.id}`}>
-                                                <Button size="sm" className="bg-brown-900 hover:bg-brown-800">
-                                                    Buy Now
+                            products.map((product: Product & { totalSold: number }, index: number) => (
+                                <div key={product.id} className="group">
+                                    <div className="space-y-4">
+                                        <Link href={`/product/${product.id}`}>
+                                            <div className="relative aspect-[3/4] overflow-hidden bg-neutral-100">
+                                                <Image
+                                                    src={`/assets/${product.image}`}
+                                                    alt={product.name}
+                                                    fill
+                                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                                />
+                                                <div className="absolute top-4 left-4 bg-neutral-900 text-white px-3 py-1 text-xs tracking-wider">
+                                                    #{index + 1} BESTSELLER
+                                                </div>
+                                            </div>
+                                        </Link>
+                                        <div className="space-y-3">
+                                            <div>
+                                                <Link href={`/product/${product.id}`}>
+                                                    <h3 className="text-base font-light tracking-wide text-neutral-900 hover:text-neutral-600 transition-colors line-clamp-2">
+                                                        {product.name}
+                                                    </h3>
+                                                </Link>
+                                                <div className="flex items-center gap-1 mt-2">
+                                                    {[...Array(5)].map((_, i) => (
+                                                        <Star key={i} className="h-3 w-3 fill-neutral-900 text-neutral-900" />
+                                                    ))}
+                                                    <span className="text-xs text-neutral-400 ml-1">({product.totalSold * 12})</span>
+                                                </div>
+                                            </div>
+                                            <p className="text-lg font-normal text-neutral-900">${product.price}</p>
+                                            <Link href={`/product/${product.id}`} className="block">
+                                                <Button className="w-full bg-neutral-900 hover:bg-neutral-800 text-white rounded-none h-11 font-light tracking-wider group">
+                                                    <ShoppingBag className="mr-2 h-4 w-4" />
+                                                    ADD TO CART
+                                                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                                                 </Button>
                                             </Link>
                                         </div>
@@ -114,7 +98,7 @@ const BestSellingPage = () => {
                             ))
                         ) : (
                             <div className="col-span-full py-20 text-center">
-                                <p className="text-lg text-gray-500">No best selling products found yet. Start ordering!</p>
+                                <p className="text-base text-neutral-500 font-light">No best selling products found yet.</p>
                             </div>
                         )}
                     </div>

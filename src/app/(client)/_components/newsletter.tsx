@@ -1,37 +1,43 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
-import Image from 'next/image';
-import React from 'react';
+import { ArrowRight } from 'lucide-react';
 
 export default function NewsLetter() {
     return (
-        <section className="mx-auto max-w-6xl px-5 py-14 md:py-20">
-            <div className="relative mx-auto flex max-w-4xl flex-col items-center justify-center rounded-3xl px-10 py-14 text-white">
-                <h2 className="text-3xl font-bold tracking-tight">Stay Updated with Newsletter</h2>
-                <p className="mt-6 w-8/12 text-center">
-                    Get the latest news, exclusive offers, and delicious updates delivered right to
-                    your inbox with our chocolate and cake shop newsletter.
-                </p>
-                <div className="relative mt-6 w-[400px]">
-                    <Input
-                        className="border-white/40 bg-white/10 placeholder:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/50 focus-visible:ring-offset-0"
-                        placeholder="Enter your email address"
-                    />
-                    <Button
-                        variant="secondary"
-                        className="absolute right-0 top-1/2 mr-1 h-8 -translate-y-1/2 transform bg-white text-brown-900 hover:bg-white"
-                        size="sm">
-                        Subscribe
-                    </Button>
+        <section className="bg-white py-16 md:py-24">
+            <div className="container mx-auto px-4 md:px-6 lg:px-8">
+                <div className="max-w-4xl mx-auto">
+                    <div className="bg-neutral-900 p-8 md:p-12 lg:p-16">
+                        <div className="grid md:grid-cols-2 gap-8 items-center">
+                            <div className="space-y-4">
+                                <p className="text-xs tracking-[0.3em] text-neutral-400 uppercase">Newsletter</p>
+                                <h2 className="text-2xl md:text-3xl lg:text-4xl font-light tracking-tight text-white">
+                                    Get Exclusive Offers
+                                </h2>
+                                <p className="text-sm md:text-base text-neutral-300 font-light leading-relaxed">
+                                    Subscribe to receive special offers, new arrivals, and curated collections.
+                                </p>
+                            </div>
+                            
+                            <div className="space-y-4">
+                                <div className="flex flex-col sm:flex-row gap-3">
+                                    <Input
+                                        type="email"
+                                        placeholder="Your email address"
+                                        className="flex-1 bg-white border-0 rounded-none h-12 text-neutral-900 placeholder:text-neutral-400 focus-visible:ring-1 focus-visible:ring-white focus-visible:ring-offset-0"
+                                    />
+                                    <Button className="bg-white hover:bg-neutral-100 text-neutral-900 rounded-none h-12 px-8 font-light tracking-wider">
+                                        SUBSCRIBE
+                                        <ArrowRight className="ml-2 h-4 w-4" />
+                                    </Button>
+                                </div>
+                                <p className="text-xs text-neutral-400 font-light">
+                                    By subscribing, you agree to our Privacy Policy and consent to receive updates.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <Image
-                    src="/choco-bg.jpg"
-                    alt="Hero Chololate"
-                    fill
-                    className="-z-10 rounded-3xl object-cover"
-                />
-                <div className="absolute inset-0 -z-10 rounded-3xl bg-black/70" />
             </div>
         </section>
     );

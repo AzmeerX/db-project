@@ -82,3 +82,37 @@ export const getBestSellingProducts = async () => {
     const response = await api.get('/products/best-selling');
     return await response.data;
 };
+
+export const updateProduct = async (id: number, data: FormData) => {
+    const response = await api.patch(`/products/${id}`, data, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+    return response.data;
+};
+
+export const deleteProduct = async (id: number) => {
+    const response = await api.delete(`/products/${id}`);
+    return response.data;
+};
+
+export const updateWarehouse = async (id: number, data: Warehouse) => {
+    const response = await api.patch(`/warehouses/${id}`, data);
+    return response.data;
+};
+
+export const deleteWarehouse = async (id: number) => {
+    const response = await api.delete(`/warehouses/${id}`);
+    return response.data;
+};
+
+export const updateDeliveryPerson = async (id: number, data: DeliveryPerson) => {
+    const response = await api.patch(`/delivery-persons/${id}`, data);
+    return response.data;
+};
+
+export const deleteDeliveryPerson = async (id: number) => {
+    const response = await api.delete(`/delivery-persons/${id}`);
+    return response.data;
+};

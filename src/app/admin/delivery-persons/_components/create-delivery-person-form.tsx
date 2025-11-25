@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -21,7 +21,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
-import { Warehouse } from '@/types';
+import { Warehouse, DeliveryPerson } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import { getAllWarehouses } from '@/http/api';
 
@@ -30,17 +30,32 @@ export type FormValues = z.input<typeof deliveryPersonSchema>;
 const CreateDeliveryPersonForm = ({
     onSubmit,
     disabled,
+    defaultValues,
+    isEdit = false,
 }: {
     onSubmit: (formValus: FormValues) => void;
     disabled: boolean;
+    defaultValues?: DeliveryPerson | null;
+    isEdit?: boolean;
 }) => {
     const form = useForm<z.infer<typeof deliveryPersonSchema>>({
         resolver: zodResolver(deliveryPersonSchema),
         defaultValues: {
-            name: '',
-            phone: '',
+            name: defaultValues?.name || '',
+            phone: defaultValues?.phone || '',
+            warehouseId: defaultValues?.warehouseId || undefined,
         },
     });
+
+    useEffect(() => {
+        if (defaultValues) {
+            form.reset({
+                name: defaultValues.name,
+                phone: defaultValues.phone,
+                warehouseId: defaultValues.warehouseId,
+            });
+        }
+    }, [defaultValues, form]);
 
     const {
         data: warehouses,
@@ -121,7 +136,7 @@ const CreateDeliveryPersonForm = ({
                 />
 
                 <Button className="w-full" disabled={disabled}>
-                    {disabled ? <Loader2 className="size-4 animate-spin" /> : 'Create'}
+                    {disabled ? <Loader2 className="size-4 animate-spin" /> : isEdit ? 'Update' : 'Create'}
                 </Button>
             </form>
         </Form>

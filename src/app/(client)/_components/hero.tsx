@@ -1,35 +1,74 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import React from 'react';
+import Link from 'next/link';
+import { ArrowRight, Clock, Shield, Zap } from 'lucide-react';
 
 export default function Hero() {
     return (
-        <section className="custom-height relative">
-            <div className="container z-50 mx-auto my-auto flex h-full flex-col justify-center px-5 text-white md:px-10 xl:px-28 3xl:px-5">
-                <h1 className="text-8xl font-bold capitalize leading-[1.2] tracking-tight 3xl:text-8xl 3xl:leading-[1.2]">
-                    10 Minute Delivery <br /> At Your Door
-                </h1>
-                <p className="mt-8 max-w-[600px] text-xl 3xl:text-2xl">
-                    Why wait? Our 10-minute delivery service brings your favorite chocolates right
-                    to your door, swiftly and reliably. Convenience and indulgence, all in one
-                    package.
-                </p>
-                <Button variant="secondary" className="mt-8 w-fit px-8">
-                    Shop Now
-                </Button>
-            </div>
+        <section className="relative min-h-[calc(100vh-104px)] bg-neutral-50">
+            <div className="container mx-auto px-4 md:px-6 lg:px-8">
+                <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-104px)] py-12 lg:py-0">
+                    {/* Left Content */}
+                    <div className="space-y-8 lg:pr-12">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-900 text-white text-xs tracking-wider rounded-full">
+                            <Zap className="h-3 w-3" />
+                            EXPRESS DELIVERY
+                        </div>
+                        
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light leading-[1.1] tracking-tight text-neutral-900">
+                            Premium Chocolate
+                            <span className="block font-normal mt-2">Delivered in 30 Minutes</span>
+                        </h1>
+                        
+                        <p className="text-base md:text-lg text-neutral-600 font-light leading-relaxed max-w-xl">
+                            Experience the finest selection of artisan chocolates, delivered fresh to your doorstep. 
+                            Indulge in luxury, one bite at a time.
+                        </p>
 
-            <Image
-                src="/chocolate.jpg"
-                alt="Hero Chololate"
-                fill
-                // width={0}
-                // height={0}
-                // sizes="100vw"
-                // style={{ width: '100%', height: '100%' }} // optional
-                className="-z-10 object-cover"
-            />
-            <div className="absolute inset-0 -z-10 bg-black/50" />
+                        <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                            <Link href="#products">
+                                <Button className="w-full sm:w-auto bg-neutral-900 hover:bg-neutral-800 text-white px-8 py-6 text-base font-light tracking-wider rounded-none">
+                                    SHOP NOW
+                                    <ArrowRight className="ml-2 h-4 w-4" />
+                                </Button>
+                            </Link>
+                            <Link href="#about">
+                                <Button variant="outline" className="w-full sm:w-auto border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white px-8 py-6 text-base font-light tracking-wider rounded-none">
+                                    LEARN MORE
+                                </Button>
+                            </Link>
+                        </div>
+
+                        {/* Features */}
+                        <div className="grid grid-cols-3 gap-6 pt-8 border-t border-neutral-200">
+                            <div className="space-y-2">
+                                <Clock className="h-5 w-5 text-neutral-900" />
+                                <p className="text-xs font-light text-neutral-600 tracking-wide">30 MIN<br />DELIVERY</p>
+                            </div>
+                            <div className="space-y-2">
+                                <Shield className="h-5 w-5 text-neutral-900" />
+                                <p className="text-xs font-light text-neutral-600 tracking-wide">100%<br />AUTHENTIC</p>
+                            </div>
+                            <div className="space-y-2">
+                                <Zap className="h-5 w-5 text-neutral-900" />
+                                <p className="text-xs font-light text-neutral-600 tracking-wide">PREMIUM<br />QUALITY</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Image */}
+                    <div className="relative h-[400px] lg:h-[600px] xl:h-[700px]">
+                        <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-none" />
+                        <Image
+                            src="/chocolate.jpg"
+                            alt="Premium Chocolate"
+                            fill
+                            className="object-cover rounded-none"
+                            priority
+                        />
+                    </div>
+                </div>
+            </div>
         </section>
     );
 }

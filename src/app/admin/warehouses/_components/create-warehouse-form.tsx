@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -14,23 +14,37 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
 import { warehouseSchema } from '@/lib/validators/warehouseSchema';
+import { Warehouse } from '@/types';
 
 export type FormValues = z.input<typeof warehouseSchema>;
 
 const CreateWarehouseForm = ({
     onSubmit,
     disabled,
+    defaultValues,
+    isEdit = false,
 }: {
     onSubmit: (formValus: FormValues) => void;
     disabled: boolean;
+    defaultValues?: Warehouse | null;
+    isEdit?: boolean;
 }) => {
     const form = useForm<z.infer<typeof warehouseSchema>>({
         resolver: zodResolver(warehouseSchema),
         defaultValues: {
-            name: '',
-            pincode: '',
+            name: defaultValues?.name || '',
+            pincode: defaultValues?.pincode || '',
         },
     });
+
+    useEffect(() => {
+        if (defaultValues) {
+            form.reset({
+                name: defaultValues.name,
+                pincode: defaultValues.pincode,
+            });
+        }
+    }, [defaultValues, form]);
 
     const handleSubmit = (values: FormValues) => {
         onSubmit(values);
@@ -67,7 +81,7 @@ const CreateWarehouseForm = ({
                 />
 
                 <Button className="w-full" disabled={disabled}>
-                    {disabled ? <Loader2 className="size-4 animate-spin" /> : 'Create'}
+                    {disabled ? <Loader2 className="size-4 animate-spin" /> : isEdit ? 'Update' : 'Create'}
                 </Button>
             </form>
         </Form>
