@@ -89,3 +89,5 @@ export const columns: ColumnDef<Product>[] = [
         },
     },
 ];
+
+

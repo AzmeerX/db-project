@@ -24,8 +24,8 @@ const StatusChanger = ({ orderId, currentStatus }: { orderId: number; currentSta
             queryClient.invalidateQueries({ queryKey: ['orders'] });
             toast({ title: 'Order status updated successfully' });
         },
-        // todo:
-        // handle errors onError
+
+
     });
 
     return (
@@ -48,3 +48,5 @@ const StatusChanger = ({ orderId, currentStatus }: { orderId: number; currentSta
 };
 
 export default StatusChanger;
+
+

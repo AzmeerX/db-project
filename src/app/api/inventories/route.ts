@@ -11,8 +11,8 @@ export async function POST(request: Request) {
     if (!session) {
         return Response.json({ message: 'Not allowed' }, { status: 401 });
     }
-    // todo: check user access.
-    // @ts-ignore
+
+
     if (session.token.role !== 'admin') {
         return Response.json({ message: 'Not allowed' }, { status: 403 });
     }
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
         return Response.json({ message: 'OK' }, { status: 201 });
     } catch (err) {
         console.log('error: ', err);
-        // todo: check database status code, and if it is duplicate value code then send the message to the client.
+
         return Response.json(
             { message: 'Failed to store the inventory into the database' },
             { status: 500 }
@@ -61,3 +61,5 @@ export async function GET() {
         return Response.json({ message: 'Failed to fetch inventories' }, { status: 500 });
     }
 }
+
+

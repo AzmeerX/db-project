@@ -104,8 +104,9 @@ function formatDate(isoString: string): string {
         day: 'numeric',
     };
 
-    // Format the date to "Month Day, Year"
     const formattedDate = date.toLocaleDateString('en-US', options);
 
     return formattedDate;
 }
+
+

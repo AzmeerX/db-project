@@ -19,9 +19,8 @@ const OffersPage = () => {
         queryFn: getAllProducts,
     });
 
-    // Filter products that are marked as offers
     const offerProducts = products?.filter((p: Product) => p.isOffer) || [];
-    // Fallback to some products if no offers are explicitly set (for demo purposes)
+
     const displayProducts = offerProducts.length > 0 ? offerProducts : products?.slice(0, 8) || [];
     const flashSaleProduct = displayProducts?.[0];
     console.log(flashSaleProduct);
@@ -29,7 +28,7 @@ const OffersPage = () => {
         <>
             <Header />
             <main className="min-h-screen bg-gray-50">
-                {/* Section 1: Hero */}
+                {}
                 <section className="bg-neutral-50 py-20 md:py-32">
                     <div className="container mx-auto px-5">
                         <div className="text-center max-w-3xl mx-auto space-y-6">
@@ -47,7 +46,7 @@ const OffersPage = () => {
                     </div>
                 </section>
 
-                {/* Section 2: Flash Sale */}
+                {}
                 <section className="bg-white py-16 border-y border-neutral-200">
                     <div className="container mx-auto px-5">
                         <div className="mb-12 flex flex-col items-center justify-between gap-6 bg-neutral-900 p-8 md:p-10 text-white md:flex-row">
@@ -110,7 +109,7 @@ const OffersPage = () => {
                     </div>
                 </section>
 
-                {/* Section 3: All Offers Grid */}
+                {}
                 <section className="container mx-auto px-5 py-20">
                     <div className="mb-12 text-center">
                         <h2 className="text-3xl md:text-4xl font-light tracking-wider text-neutral-900">ALL OFFERS</h2>
@@ -168,7 +167,7 @@ const OffersPage = () => {
                     </div>
                 </section>
 
-                {/* Section 4: Bundle Deals */}
+                {}
                 <section className="bg-neutral-50 py-20 border-t border-neutral-200">
                     <div className="container mx-auto px-5">
                         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -207,3 +206,5 @@ const OffersPage = () => {
 };
 
 export default OffersPage;
+
+

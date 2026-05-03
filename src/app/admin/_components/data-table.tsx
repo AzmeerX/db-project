@@ -67,3 +67,5 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
         </div>
     );
 }
+
+

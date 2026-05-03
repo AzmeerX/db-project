@@ -8,11 +8,11 @@ function makeQueryClient() {
 }
 
 function getQueryClient() {
-    // we are on server
+
     if (typeof window === 'undefined') {
         return makeQueryClient();
     } else {
-        // on client
+
         if (!browserQueryClient) {
             browserQueryClient = makeQueryClient();
         }
@@ -25,3 +25,5 @@ const queryClient = getQueryClient();
 export function QueryProvider({ children }: { children: React.ReactNode }) {
     return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 }
+
+

@@ -22,3 +22,5 @@ export const useNewWarehouse = create<NewWarehouseState>((set) => {
         clearEdit: () => set({ editId: null, editData: null }),
     };
 });
+
+

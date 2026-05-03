@@ -10,7 +10,7 @@ import { api } from './client';
 
 export const getAllProducts = async () => {
     const response = await api.get('/products');
-    return await response.data;
+    return response.data?.products ?? [];
 };
 
 export const createProduct = async (data: FormData) => {
@@ -80,7 +80,7 @@ export const getMyOrders = async () => {
 
 export const getBestSellingProducts = async () => {
     const response = await api.get('/products/best-selling');
-    return await response.data;
+    return response.data?.products ?? [];
 };
 
 export const updateProduct = async (id: number, data: FormData) => {
@@ -116,3 +116,5 @@ export const deleteDeliveryPerson = async (id: number) => {
     const response = await api.delete(`/delivery-persons/${id}`);
     return response.data;
 };
+
+

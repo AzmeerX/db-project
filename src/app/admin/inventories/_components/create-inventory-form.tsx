@@ -154,3 +154,5 @@ const CreateInventoryForm = ({
 };
 
 export default CreateInventoryForm;
+
+

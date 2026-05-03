@@ -6,15 +6,15 @@ import { eq } from 'drizzle-orm';
 import { getServerSession } from 'next-auth';
 
 export async function PATCH(request: Request) {
-    // todo: verify if user is admin
+
 
     const session = await getServerSession(authOptions);
 
     if (!session) {
         return Response.json({ message: 'Not allowed' }, { status: 401 });
     }
-    // todo: check user access.
-    // @ts-ignore
+
+
     if (session.token.role !== 'admin') {
         return Response.json({ message: 'Not allowed' }, { status: 403 });
     }
@@ -29,15 +29,14 @@ export async function PATCH(request: Request) {
     }
 
     try {
-        // Update order status in a transaction to ensure consistency
+
         await db.transaction(async (tx) => {
-            // Update the order status
+
             await tx
                 .update(orders)
                 .set({ status: validatedData.status })
                 .where(eq(orders.id, validatedData.orderId));
 
-            // If order is completed or cancelled, free up the delivery person
             if (validatedData.status === 'delivered' || 
                 validatedData.status === 'cancelled' || 
                 validatedData.status === 'completed') {
@@ -63,3 +62,5 @@ export async function PATCH(request: Request) {
         return Response.json({ message: 'Failed to update the order' }, { status: 500 });
     }
 }
+
+

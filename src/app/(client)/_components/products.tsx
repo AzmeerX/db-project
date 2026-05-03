@@ -11,7 +11,7 @@ import { ArrowRight, ShoppingBag } from 'lucide-react';
 
 const Products = () => {
     const skeletons = Array.from({ length: 8 });
-    const { data: products, isLoading } = useQuery({
+    const { data: products = [], isLoading } = useQuery<Product[]>({
         queryKey: ['products'],
         queryFn: getAllProducts,
         staleTime: 10 * 1000,
@@ -44,7 +44,7 @@ const Products = () => {
                         </>
                     ) : (
                         <>
-                            {products?.map((product: Product) => {
+                            {products.map((product: Product) => {
                                 return (
                                     <div key={product.id} className="group">
                                         <div className="space-y-4">
@@ -98,3 +98,5 @@ const Products = () => {
 };
 
 export default Products;
+
+

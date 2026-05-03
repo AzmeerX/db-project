@@ -1,5 +1,5 @@
 import { db } from '@/lib/db/db';
-import { orders, products } from '@/lib/db/schema';
+import { orderItems, products } from '@/lib/db/schema';
 import { desc, eq, sql } from 'drizzle-orm';
 
 export const dynamic = 'force-dynamic';
@@ -10,15 +10,14 @@ export async function GET() {
             .select({
                 id: products.id,
                 name: products.name,
-                image: products.image,
                 price: products.price,
                 description: products.description,
-                totalSold: sql<number>`sum(${orders.qty})`.mapWith(Number),
+                totalSold: sql<number>`sum(${orderItems.quantity})`.mapWith(Number),
             })
-            .from(orders)
-            .leftJoin(products, eq(orders.productId, products.id))
+            .from(orderItems)
+            .leftJoin(products, eq(orderItems.productId, products.id))
             .groupBy(products.id)
-            .orderBy(desc(sql`sum(${orders.qty})`))
+            .orderBy(desc(sql`sum(${orderItems.quantity})`))
             .limit(8);
 
         return Response.json(bestSelling);
@@ -27,3 +26,5 @@ export async function GET() {
         return Response.json({ message: 'Failed to fetch best selling products' }, { status: 500 });
     }
 }
+
+

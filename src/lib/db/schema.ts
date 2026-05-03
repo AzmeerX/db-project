@@ -17,10 +17,10 @@ export const users = pgTable('users', {
 export const products = pgTable('products', {
     id: serial('id').primaryKey(),
     name: varchar('name', { length: 100 }).notNull(),
-    image: text('image'),
     description: text('description'),
     price: integer('price').notNull(),
-    isOffer: boolean('is_offer').default(false),
+    stock: integer('stock').notNull().default(0),
+    sku: varchar('sku', { length: 100 }).unique(),
     updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`),
     createdAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),
 });
@@ -50,10 +50,21 @@ export const orders = pgTable('orders', {
     type: varchar('type', { length: 6 }).default('quick'),
     price: integer('price').notNull(),
     address: text('address').notNull(),
+    totalAmount: integer('total_amount').notNull(),
+    updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`),
+    createdAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const orderItems = pgTable('order_items', {
+    id: serial('id').primaryKey(),
+    orderId: integer('order_id')
+        .references(() => orders.id, { onDelete: 'cascade' })
+        .notNull(),
     productId: integer('product_id')
         .references(() => products.id, { onDelete: 'no action' })
         .notNull(),
-    qty: integer('qty').notNull(),
+    quantity: integer('quantity').notNull(),
+    price: integer('price').notNull(),
     updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`),
     createdAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),
 });
@@ -77,3 +88,5 @@ export const inventories = pgTable('inventories', {
     updatedAt: timestamp('updated_at').default(sql`CURRENT_TIMESTAMP`),
     createdAt: timestamp('created_at').default(sql`CURRENT_TIMESTAMP`),
 });
+
+

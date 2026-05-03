@@ -23,7 +23,7 @@ export default function About() {
         <section id="about" className="bg-neutral-50 py-16 md:py-24">
             <div className="container mx-auto px-4 md:px-6 lg:px-8">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    {/* Left Content */}
+                    {}
                     <div className="space-y-8">
                         <div className="space-y-4">
                             <p className="text-xs tracking-[0.3em] text-neutral-500 uppercase">Our Story</p>
@@ -44,7 +44,7 @@ export default function About() {
                         </p>
                     </div>
 
-                    {/* Right Values */}
+                    {}
                     <div className="space-y-6">
                         {values.map((value, index) => {
                             const Icon = value.icon;
@@ -68,3 +68,5 @@ export default function About() {
         </section>
     );
 }
+
+

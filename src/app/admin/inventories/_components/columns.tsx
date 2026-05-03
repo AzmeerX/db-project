@@ -51,3 +51,5 @@ export const columns: ColumnDef<Inventory>[] = [
         },
     },
 ];
+
+

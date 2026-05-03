@@ -30,22 +30,19 @@ export async function POST(request: Request) {
 
         return Response.json({ message: 'OK' }, { status: 200 });
     } else if (data.is_final === true && data.status === 'fail') {
-        // todo: check webhook sign
-        // todo: use db transaction
 
-        // delivery person
+
+
         await db
             .update(deliveryPersons)
             .set({ orderId: sql`NULL` })
             .where(eq(deliveryPersons.orderId, parseInt(clonedData.order_id)));
 
-        // Inventory
         await db
             .update(inventories)
             .set({ orderId: sql`NULL` })
             .where(eq(inventories.orderId, parseInt(clonedData.order_id)));
 
-        // delete an order
         await db.delete(orders).where(eq(orders.id, parseInt(clonedData.order_id)));
 
         return Response.json({ message: 'OK' }, { status: 200 });
@@ -54,3 +51,5 @@ export async function POST(request: Request) {
         return Response.json({});
     }
 }
+
+

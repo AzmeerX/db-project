@@ -11,7 +11,6 @@ export async function GET() {
         return Response.json({ message: 'Not allowed' }, { status: 401 });
     }
 
-    // Number(session.token.id),
 
     try {
         const myOrders = await db
@@ -28,8 +27,8 @@ export async function GET() {
             })
             .from(orders)
             .leftJoin(products, eq(orders.productId, products.id))
-            // todo: add types on session
-            // @ts-ignore
+
+
             .where(eq(orders.userId, Number(session.token.id)))
             .orderBy(desc(orders.id));
             console.log('my orders', myOrders);
@@ -38,3 +37,5 @@ export async function GET() {
         return Response.json({ message: 'Failed to get my orders' }, { status: 500 });
     }
 }
+
+

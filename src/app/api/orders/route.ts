@@ -6,7 +6,7 @@ import { and, desc, eq, inArray, isNull } from 'drizzle-orm';
 import { getServerSession } from 'next-auth';
 
 export async function POST(request: Request) {
-    // get session
+
     const session = await getServerSession(authOptions);
     console.log('session', session);
 
@@ -14,7 +14,6 @@ export async function POST(request: Request) {
         return Response.json({ message: 'Not allowed' }, { status: 401 });
     }
 
-    // validate request body
     const requestData = await request.json();
     let validatedData;
 
@@ -26,7 +25,6 @@ export async function POST(request: Request) {
 
     console.log('validated data:', validatedData);
 
-    // Order creation.
 
     const warehouseResult = await db
         .select({ id: warehouses.id })
@@ -51,21 +49,20 @@ export async function POST(request: Request) {
 
     try {
         finalOrder = await db.transaction(async (tx) => {
-            // create order
+
             const order = await tx
                 .insert(orders)
 
                 .values({
                     ...validatedData,
-                    // @ts-ignore
+
                     userId: Number(session.token.id),
                     price: foundProducts[0].price * validatedData.qty,
-                    // todo: move all statuses to enum or const
+
                     status: 'received',
                 })
                 .returning({ id: orders.id, price: orders.price });
 
-            // check stock
 
             const availableStock = await tx
                 .select()
@@ -86,7 +83,6 @@ export async function POST(request: Request) {
                 return;
             }
 
-            // check delivery person availibility
             const availablePersons = await tx
                 .select()
                 .from(deliveryPersons)
@@ -105,8 +101,7 @@ export async function POST(request: Request) {
                 return;
             }
 
-            // stock is available and delivery person is available
-            // update inventories table and add order_id
+
             await tx
                 .update(inventories)
                 .set({ orderId: order[0].id })
@@ -117,20 +112,18 @@ export async function POST(request: Request) {
                     )
                 );
 
-            // update delivery person
             await tx
                 .update(deliveryPersons)
                 .set({ orderId: order[0].id })
                 .where(eq(deliveryPersons.id, availablePersons[0].id));
 
-            // update order
             await tx.update(orders).set({ status: 'reserved' }).where(eq(orders.id, order[0].id));
 
             return order[0];
         });
     } catch (err) {
-        // log
-        // in production -> be careful don't return internal errors to the client.
+
+
         return Response.json(
             {
                 message: transactionError ? transactionError : 'Error while db transaction',
@@ -139,21 +132,19 @@ export async function POST(request: Request) {
         );
     }
 
-    // create invoice
-    // Cash on Delivery (COD) implementation
-    // Since we don't have an external payment gateway, we'll just redirect to success
-    // and mark the order as 'pay_on_delivery' or keep it 'reserved' until delivered.
-    
-    // For COD, we can consider the order placement successful immediately.
+
+
+
+
     const paymentUrl = `${process.env.APP_BASE_URL}/payment/success`;
 
     return Response.json({ paymentUrl });
 }
 
 export async function GET() {
-    // todo: add authentication and authorization
-    // todo: add logging
-    // todo: add error handling
+
+
+
     const allOrders = await db
         .select({
             id: orders.id,
@@ -172,10 +163,12 @@ export async function GET() {
         .from(orders)
         .leftJoin(products, eq(orders.productId, products.id))
         .leftJoin(users, eq(orders.userId, users.id))
-        // join inventories (orderId)
-        // join delivery person (orderId)
-        // join warehouse (deliveryId)
-        // todo: 1. use pagination, 2. Put index
+
+
+
+
         .orderBy(desc(orders.id));
     return Response.json(allOrders);
 }
+
+

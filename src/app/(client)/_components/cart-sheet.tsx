@@ -57,7 +57,7 @@ const CartSheet = () => {
                                 fill
                                 className="object-contain"
                                 onError={(e) => {
-                                    // Fallback if image missing
+
                                     e.currentTarget.style.display = 'none';
                                 }}
                             />
@@ -156,3 +156,5 @@ const CartSheet = () => {
 };
 
 export default CartSheet;
+
+

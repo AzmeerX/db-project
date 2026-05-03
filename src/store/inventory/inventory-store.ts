@@ -13,3 +13,5 @@ export const useNewInventory = create<NewInventoryState>((set) => {
         onClose: () => set({ isOpen: false }),
     };
 });
+
+

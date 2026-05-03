@@ -13,8 +13,8 @@ export async function POST(request: Request) {
     if (!session) {
         return Response.json({ message: 'Not allowed' }, { status: 401 });
     }
-    // todo: check user access.
-    // @ts-ignore
+
+
     if (session.token.role !== 'admin') {
         return Response.json({ message: 'Not allowed' }, { status: 403 });
     }
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
     try {
         await db.insert(products).values({ ...validatedData, image: filename });
     } catch (err) {
-        // todo: remove stored image from fs
+
         return Response.json(
             { message: 'Failed to store product into the database' },
             { status: 500 }
@@ -67,3 +67,5 @@ export async function GET() {
         return Response.json({ message: 'Failed to fetch products' }, { status: 500 });
     }
 }
+
+

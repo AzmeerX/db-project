@@ -22,3 +22,5 @@ export const useNewProduct = create<NewProductState>((set) => {
         clearEdit: () => set({ editId: null, editData: null }),
     };
 });
+
+

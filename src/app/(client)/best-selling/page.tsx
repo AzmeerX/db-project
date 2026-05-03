@@ -23,7 +23,7 @@ const BestSellingPage = () => {
         <>
             <Header />
             <main className="min-h-screen bg-white">
-                {/* Hero Section */}
+                {}
                 <section className="bg-neutral-50 py-16 md:py-24">
                     <div className="container mx-auto px-4 md:px-6 lg:px-8">
                         <div className="text-center space-y-6 max-w-3xl mx-auto">
@@ -41,7 +41,7 @@ const BestSellingPage = () => {
                     </div>
                 </section>
 
-                {/* Products Section */}
+                {}
                 <section className="container mx-auto px-4 md:px-6 lg:px-8 py-16 md:py-24">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
                         {isLoading ? (
@@ -104,7 +104,7 @@ const BestSellingPage = () => {
                     </div>
                 </section>
 
-                {/* Section 4: Testimonials */}
+                {}
                 <section className="bg-brown-50 py-20">
                     <div className="container mx-auto px-5">
                         <h2 className="mb-12 text-center text-3xl font-bold text-brown-900">Why People Love Us</h2>
@@ -154,3 +154,5 @@ const BestSellingPage = () => {
 };
 
 export default BestSellingPage;
+
+

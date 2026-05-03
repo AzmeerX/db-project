@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { connection, db } from '@/lib/db/db';
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
 
@@ -5,3 +6,5 @@ import { migrate } from 'drizzle-orm/postgres-js/migrator';
     await migrate(db, { migrationsFolder: './drizzle' });
     await connection.end();
 })();
+
+

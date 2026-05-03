@@ -67,7 +67,7 @@ export default function Header() {
                 </div>
             </nav>
             
-            {/* Mobile Menu */}
+            {}
             {mobileMenuOpen && (
                 <div className="lg:hidden border-t border-neutral-200 bg-white">
                     <ul className="container mx-auto flex flex-col px-4 py-4">
@@ -99,3 +99,5 @@ export default function Header() {
         </header>
     );
 }
+
+

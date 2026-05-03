@@ -5,14 +5,14 @@ import { warehouseSchema } from '@/lib/validators/warehouseSchema';
 import { getServerSession } from 'next-auth';
 
 export async function POST(request: Request) {
-    // todo: check auth
+
     const session = await getServerSession(authOptions);
 
     if (!session) {
         return Response.json({ message: 'Not allowed' }, { status: 401 });
     }
-    // todo: check user access.
-    // @ts-ignore
+
+
     if (session.token.role !== 'admin') {
         return Response.json({ message: 'Not allowed' }, { status: 403 });
     }
@@ -44,3 +44,5 @@ export async function GET() {
         return Response.json({ message: 'Failed to fetch all warehouses' }, { status: 500 });
     }
 }
+
+

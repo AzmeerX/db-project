@@ -47,3 +47,5 @@ const InventoriesPage = () => {
 };
 
 export default InventoriesPage;
+
+

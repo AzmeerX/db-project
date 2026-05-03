@@ -8,7 +8,7 @@ export default function Hero() {
         <section className="relative min-h-[calc(100vh-104px)] bg-neutral-50">
             <div className="container mx-auto px-4 md:px-6 lg:px-8">
                 <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-104px)] py-12 lg:py-0">
-                    {/* Left Content */}
+                    {}
                     <div className="space-y-8 lg:pr-12">
                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-900 text-white text-xs tracking-wider rounded-full">
                             <Zap className="h-3 w-3" />
@@ -39,7 +39,7 @@ export default function Hero() {
                             </Link>
                         </div>
 
-                        {/* Features */}
+                        {}
                         <div className="grid grid-cols-3 gap-6 pt-8 border-t border-neutral-200">
                             <div className="space-y-2">
                                 <Clock className="h-5 w-5 text-neutral-900" />
@@ -56,7 +56,7 @@ export default function Hero() {
                         </div>
                     </div>
 
-                    {/* Right Image */}
+                    {}
                     <div className="relative h-[400px] lg:h-[600px] xl:h-[700px]">
                         <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-none" />
                         <Image
@@ -72,3 +72,5 @@ export default function Hero() {
         </section>
     );
 }
+
+

@@ -61,8 +61,7 @@ const ProductSheet = () => {
         formdata.append('name', values.name);
         formdata.append('description', values.description);
         formdata.append('price', String(values.price));
-        
-        // Only append image if it's a FileList with files
+
         if (values.image && values.image instanceof FileList && values.image.length > 0) {
             formdata.append('image', values.image[0]);
         }
@@ -99,3 +98,5 @@ const ProductSheet = () => {
 };
 
 export default ProductSheet;
+
+

@@ -11,8 +11,8 @@ export async function POST(request: Request) {
     if (!session) {
         return Response.json({ message: 'Not allowed' }, { status: 401 });
     }
-    // todo: check user access.
-    // @ts-ignore
+
+
     if (session.token.role !== 'admin') {
         return Response.json({ message: 'Not allowed' }, { status: 403 });
     }
@@ -56,3 +56,5 @@ export async function GET() {
         return Response.json({ message: 'Failed to fetch delivery persons' }, { status: 500 });
     }
 }
+
+

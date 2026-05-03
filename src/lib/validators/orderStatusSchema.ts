@@ -8,3 +8,5 @@ export const orderStatusSchema = z.object({
         message: `Status should be one of: ${allowedStatuses.join(', ')}` 
     }),
 });
+
+

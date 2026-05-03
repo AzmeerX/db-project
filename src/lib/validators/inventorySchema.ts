@@ -5,3 +5,5 @@ export const inventorySchema = z.object({
     warehouseId: z.number({ message: 'Warehouse id should be a number' }),
     productId: z.number({ message: 'Product id should be a number' }),
 });
+
+

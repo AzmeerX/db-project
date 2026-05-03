@@ -19,3 +19,5 @@ export default withAuth({
 export const config = {
     matcher: ['/admin(/.*)?', '/account(/.*)?'],
 };
+
+

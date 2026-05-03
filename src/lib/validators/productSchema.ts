@@ -14,3 +14,5 @@ export const productSchema = z.object({
     price: z.number({ message: 'Product price should be a number' }),
     isOffer: z.boolean().optional(),
 });
+
+
